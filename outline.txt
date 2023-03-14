@@ -1,0 +1,421 @@
+CLASSES: inventory, product, registry, customers
+
+main
+- Sort
+
+inventory
+- stockBook : ArrayList
+- stockCD : ArrayList
+- stockDVD : ArrayList
+- Cart : ArrayList
+————————
++ getUniqueProductStock(byte) : int
++ getProductStock(byte) : int
++ getProductStock(byte, int) : int
++ getName(byte, int) : String
++ getDescription(byte, int) : String
++ restockBook(String, int) : void
++ restockCD(String, int) : void
++ restockDVD(String, int) : void
++ changeName(int, byte, String) : void
++ setDescription(int, byte, String) : void
++ getIndex(String) : int
+
+product
+- name : String
+- description : String
+- stock : int
+- price : int
+——————
++ Product(String, String) : constructor
++ getName() : String
++ getDescription() : String
++ getStock() : int
++ setName(String) : void
++ setDescription(String) : void
++ addStock(int) : void
++ removeStock(int) : void
+
+
+registry
+- registryList : ArrayList
+- RegularList : ArrayList
+- PremiumList : ArrayList
+————————
+- refreshPremMem() : void
+- refreshRegMem() : void
++ numMem() : int
++ numRegMem() : int
++ numPremMem() : int
++ nameMem() : String[]
++ nameRegMem() : String[]
++ namePremMem() : String[]
++ addMember(String, String, boolean, boolean) : void
++ changePaymentMethod(int, String) : void
++ setPremMem(int, boolean, boolean) : void
++ addMoneySpent(int, double) : void
+
+
+customer
+- name : String
+- paymentMethod : String
+- isPremium : boolean[]
+- moneySpent : double
+- profile : String[]
+——————————
++ Customer(String, String, boolean[]) : constructor
++ getName() : String
++ getPayMethod() : String
++ isPremium() : boolean
++ hasPaidThisMonth() : boolean
++ getMoneySpent() : double
++ changeName(String) : void
++ setPayMethod(String) : void
++ setPremium(boolean) : void
++ setPaidThisMonth(boolean) : void
++ addMoneySpent(int) : void
+
+
+
+
+fill with "█", "✖","X","×","·"
+
+  _
+  \\
+  \ {
+   | \
+   / /    Banana technology corp.
+  /_/
+
+█                                                              █
+█      ▄     ▄  ▄▄▄▄▄  ▄      ▄▄▄    ▄▄▄    ▄▄ ▄▄   ▄▄▄▄▄
+█  █  █  █      █     █   █  █   █  █  █  █  █    
+█  █  █  █▀▀    █     █      █   █  █  █  █  █▀▀  
+█  █  █  █      █     █   █  █   █  █  █  █  █    
+ ▀▀ ▀▀   ▀▀▀▀▀  ▀▀▀▀▀  ▀▀▀    ▀▀▀   ▀  ▀  ▀  ▀▀▀▀▀
+
+.     .   ____  ,      ___    ___    __ __    ____
+|  |  |  |      |     |   |  |   |  |  |  |  |    
+|  |  |  |——    |     |      |   |  |  |  |  |——  
+|__|__|  |____  |____ |___|  |___|  |  |  |  |____
+
+▓ 2226   ▒ 2225   — 0151   · 0183
+
+SAVE FORMAT: first inventory CD/DVD, —▓— customers
+Book, then CD, then DVD: name · amt · description ▒ name · amt · price · description ▓
+
+books: Jurassic Park, PHILOSOPHER'S stone, LotR, Dune, Not A Wake, LotR
+orbks: Dune, Harry Potter, Jurassic Park, LotR:R, LotR:T, Not A Wake
+
+DVDs: Trek V, Spongebob, Shrek, DW, Mario, TLA, Jurassic Park, Paddington 2, LotR:R, LotR:T, Dune, RotJ, Gyakuten Saiban, Metriod, Bloons
+orDs: Gyakuten Saiban, Bloons, Dune, DW, Jurassic Park, LotR:R, LotR:T, Mario, Metriod, Paddington 2, Shrek, Spongebob, Trek V, RotJ, TLA
+
+Customers: name · paymethod · ispremium · moneyspent · profile1(card/acct info) · profile2(personal notes) ▒ name · paymethod · ispremium · moneyspent ▒
+	ispremium codes: f = regular, t = prem, T = prem and paid
+Adam Malkovich·Credit Card·t·18.98▒Bobert Boblyblobson·Dogecoin·f·7.07▒Bobert Boblyblobson·Dogecoin·f·7.07▒
+
+//size: (64, 10)
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                                                              █
+█                                                              █
+█                                                              █
+█                                                              █
+█                                                              █
+█                                                              █
+█                                                              █
+█                                                              █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+Dune·23·Welcome to the world of Dune, a savage and brutal place where only the strong survive. As Baron Harkonnen, I invite you to experience the gripping tale of power, politics, and betrayal in a world where fear is a way of life. Follow Paul Atreides as he leads his people in a holy war to reclaim his father's throne, but beware, as my family, the Harkonnens, will stop at nothing to maintain our own iron grip on the spice trade. With its intricate world-building, complex characters, and Machiavellian plot twists, Dune will leave you breathless and yearning for more. So come, experience the power of the spice, and join us in the quest for ultimate control.▒Harry Potter and the PHILOSOPHER'S Stone·1·Enter the enchanting world of Harry Potter and the Philosopher's Stone, the first book in the beloved series that somehow made J.K. Rowling a millionaire. Follow Harry, a young orphan with a lightning bolt scar, as he discovers his true identity as a wizard and begins his journey at Hogwarts School of Witchcraft and Wizardry. Meet his friends, Hermione Granger and Ron Weasley, who accompany him on his quest to solve the mystery of the Sorcerer's Stone. Despite the author's recent transphobic and hateful actions towards the LGBTQ+ community, this book remains a magical and unforgettable adventure for all ages. So, enjoy the story, but don't forget to hold the author accountable for her harmful words and actions.▒Jurassic Park·52·Experience the gripping and suspenseful world of Jurassic Park, as envisioned by legendary author Michael Crichton. When billionaire John Hammond creates a theme park filled with cloned dinosaurs, he invites a group of experts to evaluate the safety of his creation. But when a tropical storm hits the island and the dinosaurs break free, chaos ensues. With stunning scientific accuracy and edge-of-your-seat thrills, this novel will take you on a journey through a world where prehistoric creatures once again roam the earth. A timeless classic that spawned a blockbuster movie franchise, Jurassic Park is a must-read for fans of science fiction and adventure.▒The Lord of the Rings: The Two Towers·23·Delve into the epic tale of The Two Towers, where the title could be referring to any number of things. Could it be the towers of Barad-dûr and Minas Tirith, or perhaps the twin towers of Minas Morgul and Orthanc? The possibilities are endless. Follow Frodo and Sam as they continue their journey to destroy the One Ring, while Aragorn, Gimli, and Legolas face new challenges and allies. Along the way, encounter treacherous foes and breathtaking landscapes, but the real question remains - which two towers are we even talking about here? Could it be the towers of Cirith Ungol and Mount Doom, or the two towers of the Black Gate and Isengard? Whatever the answer may be, The Two Towers is a thrilling and captivating installment in J.R.R. Tolkien's beloved Lord of the Rings series.▒The Return of the King·27·Welcome to the final chapter of the Lord of the Rings trilogy. Witness the continued struggle of the Free Peoples of Middle Earth against my forces of Mordor. Follow the fellowship as they journey to destroy the One Ring and put an end to my reign of power. But of course, the true hero of this tale is myself, Sauron, Dark Lord of Mordor. My power and influence stretch across the lands, as I manipulate and control those who dare to oppose me. Enjoy the minor victories of the so-called 'heroes,' but in the end, we all know who the true victor will be. Read on if you dare, but know that my power will not be so easily overcome.▒Not A Wake·314·There once was a book by Keith\nThat followed the digits of Pi, a belief\nWith words that did rhyme\nIn a rhythm divine\n"Not a Wake" is a masterpiece, in brief!\n\nIt's a journey like no other, you see\nEach word flows with mathematical glee\nFor every digit of Pi\nThe syllables won't lie\nThis book is a numerical fantasy.\n\nFrom the very first word to the end\nThis book will keep you on trend\nWith the magic of pi\nAnd the author's great eye\n"Not a Wake" is a masterpiece, my friend!\n▓
+
+Boys Who Cry·46853·Ahem, welcome to Boys Who Cry's latest album. As a long-time fan, I can attest that this album is truly their best album I have ever held with my own tentacles. The combination of their signature indie-pop sound with a new, mature twist is both refreshing and thought-provoking. The lyrics are masterfully crafted, touching on themes of love, loss, and existentialism in a way that is both relatable and poetic. The album's overall production is polished and refined, without losing the raw energy that made their previous works so special. Each song is like a sonic journey that will leave you breathless, and in the end, you'll find yourself saying, as the Boys themselves do, "I need 4-ply 4-ply 4-ply when I cry."▓
+
+
+Ace Attorney·6·yay▒Bloons TD Movie·30·yay▒Dune·5·yay▒Doctor Who: The Movie·40·WHO!!! AM!!! AAIIIIGH!!!▒Jurassic Park·36·it's good▒The Lord of the Rings: The Return of the King·45·yay▒The Lord of the Rings: The Two Towers·2·yay▒The Spongebob Squarepants Movie·62·:p▒The Super Mario Bros. Movie·2·:p▒Metroid·4·8D▒Paddington 2·2000·the perfectest movie ever▒Shrek·2001·The masterpiece▒Star Trek V: The Final Frontier·12·it's bad▒Star Wars: Episode 6 - The Return of the Jedi·654·its ok i guess▒The Last Airbender·4·no▓
+orDs: Gyakuten Saiban, Bloons, Dune, DW, Jurassic Park, LotR:R, LotR:T, Mario, Metriod, Paddington 2, Shrek, Spongebob, Trek V, RotJ, TLA
+▒··▒··
+▓
+
+stock - menuSelection + (2-disp)
+(menuSelection+2-disp)
+
+//MENU, 0=main, 1=Customers, 2=CustomerDetails, 3=AddCustomer
+            //      4=Inventory, 5=InventoryPurchaseMenu, 6=InventoryPurchase, 7=InventoryRestockMenu, 8=InventoryRestock
+            // 9=InventorySelection;Purchase, 10=InventorySelection;restock
+█                       ▀▀▀   / | \   ▀▀▀    Dune        Harry █
+█                             Return                           █
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒Customers  ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒▒▒  ▒  Products▒▒▒  ▒  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒   ▒  ▄ ▄ ▄ ▄ ▄▒▄ ▄▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▄Save & Exit▄▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒▀ ▀ ▀▒▀ ▀ ▀ ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒Customers  ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒▒▒  ▒  Products▒▒▒  ▒  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒   ▒  ▒▄ ▄▒▄▒▄ ▄ ▄ ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▀Save & Exit▀▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▀ ▀ ▀ ▀ ▀▒▀ ▀▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒  █▀  ▒ ▒ ▀█▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒█Purchase█▒  ▒Restock  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒  ▀▀  ▒   ▀▀▒  ▒   ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒    ▒▒  ▒   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒     ▒  ▒   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒  ▄▄  ▒ ▒ ▄▄▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒█Purchase█▒  ▒Restock  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒  █▄  ▒   ▄█▒  ▒   ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒    ▒▒  ▒   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒     ▒  ▒   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒ ▒   ▒  █▀  ▒  ▀█▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒▒Purchase ▒  █Restock█ ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒   ▒  ▒   ▒ ▒  ▀▀  ▒  ▀▀  ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒    ▒▒  ▒   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒     ▒  ▒   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                         MAIN MENU                            █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒▒Purchase ▒  ▒Restock  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒   ▒  ▒   █▀▒ ▀█   ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒   █Back█   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒   ▀▀▒ ▀▀   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                      Inventory Select                        █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒  █▀  ▀█▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒█BOOK█ ▒  CD ▒▒▒▒▒DVD  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒  ▀▀  ▀▀  ▒ ▒  ▒   ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒    Back▒   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒     ▒  ▒   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                      Inventory Select                        █
+█         ▒▒▒▒    ▒▒▒   ▒     ▒   ▒▒▒   ▒     ▒   ▒▒▒          █
+█         ▒   ▒  ▒   ▒  ▒▒    ▒  ▒   ▒  ▒▒    ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒  ▒ ▒   ▒  ▒   ▒         █
+█         ▒▒▒▒   ▒▒▒▒BOOK  ▒  CD ▒▒▒▒▒DVD  ▒  ▒  ▒▒▒▒▒         █
+█         ▒   ▒  ▒   ▒  ▒   ▒ ▒  ▒   ▒  ▒   ▒ ▒  ▒   ▒         █
+█         ▒   ▒  ▒   ▒  ▒    Back▒   ▒  ▒    ▒▒  ▒   ▒         █
+█         ▒▒▒▒   ▒   ▒  ▒     ▒  ▒   ▒  ▒     ▒  ▒   ▒         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█ PURCHASE BOOKS     ▄▄▄   $8.99   ▄▄▄                         █
+█         ▄▄▀▀       █    ▐▀▀▀▀█▒▌   █    █▀▀▀▀▀█        █▀▀▀  █
+█        ▀██▀▀▀▄     █    ▐    █▒▌   █    █     █        █     █
+█           ▀▀  █    █    ▐    █▒▌   █    █     █        █     █
+█         ▄▄▄▄▄▀     █    ▐▄▄▄▄█▒▌   █    █▄▄▄▄▄█        █▄▄▄  █
+█         Return     ▀▀▀   / | \   ▀▀▀  Harry Potter…  Lord of █
+█                      Jurassic Park                           █
+█                      (52 in stock)                           █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+(arrow keys to move, enter to select, backspace to go back)
+
+22 of space, can be filled on both sides gap of 8 btw books
+						6 actual gap
+
+█▀           ▄▄▀▀      █    ▐▀▀▀▀█▒▌   █    █▀▀▀▀▀█        █▀▀▀█
+█▀▀▄        ▀██▀▀▀▄    █    ▐    █▒▌   █    █     █        █   █
+█▀  █          ▀▀  █   █    ▐    █▒▌   █    █     █        █   █
+█▄▄▀         ▄▄▄▄▄▀    █    ▐▄▄▄▄█▒▌   █    █▄▄▄▄▄█        █▄▄▄█
+█urn
+  Book: | █▀▀▀▀▀█ |
+
+    CD: | ▄▀▀▀▀▀▄ |
+	|█   ▄   █|
+
+Return: |  ▄▄▀▀   |
+	| ▀██▀▀▀▄ |
+	|    ▀▀  █|
+	|  ▄▄▄▄▄▀ |
+           Return 
+
+|    ▄    |
+|  ▄▄█▄▄  |
+|    █    |
+
+    Add
+
+|    ▄    |
+|  ▄▄▄▄▄  |
+| ▀ ███ ▀ |
+|   █ █   |
+   human
+
+harry potter and the philosophers stone
+13 letters for display, 62 for selection
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█ RESTOCK DVDS       ▄▄▄           ▄▄▄                         █
+█         ▄▄▀▀       █    ▄▀▀▀▀▀▄    █     ▄▀▀▀▀▀▄         ▄▀▀▀█
+█        ▀██▀▀▀▄     █   █   ▄   █   █    █   ▄   █       █   ▄█
+█           ▀▀  █    █   █   ▀   █   █    █   ▀   █       █   ▀█
+█         ▄▄▄▄▄▀     █    ▀▄▄▄▄▄▀    █     ▀▄▄▄▄▄▀         ▀▄▄▄█
+█         Return     ▀▀▀   / | \   ▀▀▀  The SpongeBo…       Shr█
+█              Star Trek V: The Final Frontier                 █
+█                      (25 in stock)                           █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+(arrow keys to move, enter to select, back)
+
+
+█▀▀▀▀▀▀▀▀▀▀▀█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█ DVD Info  █                            ▒                ▲    █△
+█▄▄▄▄▄▄▄▄▄▄▄█                            ▒  # to order    32   █
+█     Title: Shrek                       ▒                ▼    █▽
+█ Description:                           ▒                     █
+█                                        ▒  # in stock   242   █
+█                                        ▒                     █
+█                                        ▒   (press enter to   █
+█                                        ▒    add to cart)     █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█ Cart: 12 ($71.88)           █ △░▒                  ▲         █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█░▽░▒     # to order  32         █
+█░░░░░Title:░Shrek░░░░░░░░░░░░░░░░▒                  ▼         █
+█░Description:░░░░░░░░░░░░░░░░░░░░▒      ($280,191.68)         █
+█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒                            █
+█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒     # in stock: 242        █
+█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒                            █
+█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒(press enter to add to cart)█
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█ All Customers        ▄▄▄     ▄     ▄▄▄       ▄               █
+█           ▄▄▀▀       █     ▄▄▄▄▄     █     ▄▄▄▄▄           ▄▄█
+█          ▀██▀▀▀▄     █    ▀ ███ ▀    █    ▀ ███ ▀         ▀ ██
+█             ▀▀  █    █      █ █      █      █ █             ██
+█           ▄▄▄▄▄▀     █    Adam M.    █   Bobert B.       Clar█
+█           Return     ▀▀▀   / | \   ▀▀▀                       █
+█                Adam Malkovich, 24, Credit Card               █
+█                        Premium (unpaid)                      █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+|    ▄    |
+|  ▄▄▄▄▄  |  
+| ▀ ███ ▀ |
+|   █ █   |
+Adam Malkovich·Credit Card·t·18.98·Address: 2793 SR-388·Card#: 3423-7239-5168, Security Code: 243▒Bobert Boblyblobson·Dogecoin·f·7.07·Address: 70707 Tree rd.·Account Username:DogeBob Password:SuchKabosu1234▒Clara Oswald·Leaf·T·52.98·Address: ?·?▒Squidward Tentacles·Debit Card·f·8.99·Address: Bikini Bottom·Acct #:85743-6345-8678 PIN #: 2425▒
+
+|   ▄▄▄▄  |
+|  █  █   |
+|  █  █   |
+| ▄█▄▄▀   |
+ Check Out
+
+|▄▄▄▄▄▄▄▄▄|
+|█▄▀▄▀▄▀▄█|
+| █▀▄▀▄▀█ |
+| ▀█▄█▄█▀ |
+ Check Cart
+
+
+
+failed attempt at a skull:
+
+  ▄▄▀▀▀▀▀▄▄
+ █         █
+█ ▄▄     ▄▄ █ t h a n k   y o u   f o r   y o u r
+█ ▀▀▀ ▄ ▀▀▀ █      s  e  r  v  i  c  e  s
+▀▄▄   ▀   ▄▄▀ 
+ ███ ▄ ▄ ███
+ ▀▄█▀█▀█▀█▄▀   t h e   l i v e   s e r v i c e   m o d e l
+    ▀▀▀▀▀          i s   b e s t   f o r   t h i s
+		      l i n e   o f   w o r k
+
+
+█▀▀▀▀▀██▀▀▀▀▀██▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█    █         █                                               █
+█   █           █    t h a n k   y o u   f o r   y o u r       █
+█   █ ██▄   ▄██ █         s  e  r  v  i  c  e  s               █
+█   █     █     █                                              █
+█    ██▄     ▄██                                               █
+█    █▀█▄█▄█▄█▀█                                               █
+█     ▀▀▄█▄█▄▀▀                                                █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀██▀▀▀▀▀██▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█    █         █                                               █
+█   █           █                                              █
+█   █ ██▄   ▄██ █  t h e   l i v e   s e r v i c e   m o d e l █
+█   █     █     █        i s   b e s t   f o r   t h i s       █
+█    █ ▄     ▄ █             l i n e   o f   w o r k           █
+█    █▀█▄█▄█▄█▀█                                               █
+█     ▀▀▄█▄█▄▀▀                                                █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+
+
+
+  ▄▄▀▀▀▀▀▄▄
+ █         █
+█ ▄▄     ▄▄ █ t h a n k   y o u   f o r   y o u r
+█ ▀▀▀ ▄ ▀▀▀ █      s  e  r  v  i  c  e  s
+▀▄    ▀    ▄▀ 
+  █▄ ▄ ▄ ▄█
+   █▀█▀█▀█
+    ▀▀▀▀▀
+
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                            SYSTEM                          ∧ █
+█   STORE STATS:                                               █
+█      Total Funds: $100.00                                    █
+█         Products: 12                                         █
+█              ( Books: 5,  CDs: 1,  DVDs: 6 )                 █
+█         Customers: 4                                         █
+█              ( Premium: 3,  Regular: 2 )                     █
+█——————————————————————————————————————————————————————————— ▼ █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█                            SYSTEM                          ▲ █
+█———————————————————————————————————————————————————————————   █
+█                       █▀▀         ▀▀█                        █
+█                       █ RESET MONTH █                        █
+█                       █▄▄         ▄▄█                        █
+█———————————————————————————————————————————————————————————   █
+█                         MANUAL  SAVE                         █
+█ ( Auto-saving is automatic but in case I missed something )▼ █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
