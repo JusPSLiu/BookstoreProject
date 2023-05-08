@@ -9,7 +9,7 @@ public class Bookstore {
     private static final DecimalFormat priceFormat = new DecimalFormat("###,###,##0.00");
 
     //the CartVirtualItem is simply a link to the 
-    private static ArrayList<CartVirtualItem> cartItems = new ArrayList();
+    private static ArrayList<CartVirtualItem> cartItems = new ArrayList<>();
     private static boolean premiumPay = false;
 
     /**
@@ -38,11 +38,11 @@ public class Bookstore {
      * @param String name
      * @param int amt
      */
-    public static void addToCart(byte typ, String name, int amt) {
+    public static void addToCart(byte typ, String name, int amt, boolean spec) {
         //first check if there's something like that already there
         int index = -2;
         for (int i=0;i<cartItems.size();i++) {
-            if (cartItems.get(i).getName().equals(name) && cartItems.get(i).getType() == typ) {
+            if (cartItems.get(i).getName().equals(name) && cartItems.get(i).getType() == typ && cartItems.get(i).isSpecial() == spec) {
                 index = i;
                 break;
             }
@@ -50,7 +50,7 @@ public class Bookstore {
         
         if (index == -2 && amt > 0) {
             //if it's not there (and the number is positive) add to cart
-            cartItems.add( new CartVirtualItem(typ, name, amt) );
+            cartItems.add( new CartVirtualItem(typ, name, amt, spec) );
         } else {
             //if it's there then modify the value to the new number
             if (amt > 0) cartItems.get(index).setAmount(amt);
@@ -176,6 +176,9 @@ public class Bookstore {
      * @return String receipt
      */
     public static String buyNow(int customerIndex) {
+        //add this to the record
+        RecordKeeper.addTransaction();
+
         String receipt = "  Order under name of: "+Main.registry.nameMem()[customerIndex]+"▓    Purchased: ▓ ";
         int money = 0;
         int total = 0;
@@ -188,6 +191,9 @@ public class Bookstore {
             money = (int) (100*Main.inventory.getPrice( item.getType(),  purchaseIndex )+99)*item.getAmount();
             total += money;
 
+            //add it to the record
+            RecordKeeper.addPurchase(item.getType(), purchaseIndex, item.getAmount());
+
             switch(item.getType()) {
                 //product types: 0==book, 1==CD, 2==DVD
                 //BOOKCASE
@@ -197,10 +203,11 @@ public class Bookstore {
 
                     //if the number to buy is less than the number in stock, just reduce the number in stock
                     if ( item.getAmount() < Main.inventory.getProductStock( (byte)0, purchaseIndex) )
-                        Main.inventory.restockBook(item.getName(), -1*item.getAmount());//yes i just restocked a negative number
+                        Main.inventory.restockBook(item.getName(), -1*item.getAmount(), item.isSpecial());//yes i just restocked a negative number
                     else {
-                        //if the number is equal to the number in stock, remove it
-                        Main.inventory.delete( (byte)0, purchaseIndex );
+                        //if the number is greater or equal to the number in stock, set it to 0
+                        int index = Main.inventory.findIndex((byte)0, item.getName());
+                        Main.inventory.restockBook(item.getName(), -1*Main.inventory.getProductStock((byte)0, index), item.isSpecial());
                     }
                     break;
                 
@@ -211,10 +218,11 @@ public class Bookstore {
 
                     //if the number to buy is less than the number in stock, just reduce the number in stock
                     if ( item.getAmount() < Main.inventory.getProductStock( (byte)1, purchaseIndex ) )
-                        Main.inventory.restockCD(item.getName(), -1*item.getAmount());//yes i just restocked a negative number
+                        Main.inventory.restockCD(item.getName(), -1*item.getAmount(), item.isSpecial());//yes i just restocked a negative number
                     else {
-                        //if the number is equal to the number in stock, remove it
-                        Main.inventory.delete( (byte)1, purchaseIndex );
+                        //if the number is greater or equal to the number in stock, set it to 0
+                        int index = Main.inventory.findIndex((byte)1, item.getName());
+                        Main.inventory.restockCD(item.getName(), -1*Main.inventory.getProductStock((byte)1, index), item.isSpecial());
                     }
                     break;
                 
@@ -225,10 +233,11 @@ public class Bookstore {
 
                     //if the number to buy is less than the number in stock, just reduce the number in stock
                     if ( item.getAmount() < Main.inventory.getProductStock( (byte)2, purchaseIndex ) )
-                        Main.inventory.restockDVD(item.getName(), -1*item.getAmount());//yes i just restocked a negative number
+                        Main.inventory.restockDVD(item.getName(), -1*item.getAmount(), item.isSpecial());//yes i just restocked a negative number
                     else {
-                        //if the number is equal to the number in stock, remove it
-                        Main.inventory.delete( (byte)2, purchaseIndex );
+                        //if the number is greater or equal to the number in stock, set it to 0
+                        int index = Main.inventory.findIndex((byte)2, item.getName());
+                        Main.inventory.restockDVD(item.getName(), -1*Main.inventory.getProductStock((byte)2, index), item.isSpecial());
                     }
             }
         }

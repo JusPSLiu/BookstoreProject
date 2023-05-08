@@ -1,0 +1,16 @@
+                        END OF DAY REPORT:
+
+INVENTORY
+  Items Sold:
+	— Book, Harry Potter and the PHILOSOPHER'S Stone, 1, $24.99
+	— Book, Not A Wake, 1, $11.99
+	— CD, Something, 12, $23.88
+   Total Number of Transactions: 2
+
+  Items Stocked:
+	— CD, Something, 111
+
+REGISTRY:
+	none
+
+Total Revenue Today: $12,000,000,048.86

@@ -4,7 +4,7 @@
  * @author jusps
  * @version 1
  */
-public class Product {
+public abstract class Product implements Comparable {
     private String name = "";
     private String description = "";
     private int stock = 0;
@@ -91,5 +91,15 @@ public class Product {
      */
     public void setPrice(int nuPric) {
         price = nuPric;
+    }
+
+    /**
+     * compares the prices to see which one is superior
+     * (positive if this is bigger than the other one)
+     * 
+     * @param int nuPrice
+     */
+    public int compareTo(Object otherProduct) {
+        return price - ((Product)otherProduct).getPrice();
     }
 }

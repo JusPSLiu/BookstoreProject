@@ -1,7 +1,9 @@
 class CartVirtualItem {
-    byte type = (byte)0;
+    private byte type = (byte)0;
     private String name = "";
-    int amount = 0;
+    private int amount = 0;
+    private boolean isSpecialVersion = false;
+
 
     /**
      * constructor that sets up the type, name, and amount
@@ -9,11 +11,13 @@ class CartVirtualItem {
      * @param typ
      * @param name
      * @param amt
+     * @boolean spec
      */
-    public CartVirtualItem(byte typ, String nam, int amt) {
+    public CartVirtualItem(byte typ, String nam, int amt, boolean spec) {
         type = typ;
         name = nam;
         amount = amt;
+        isSpecialVersion = spec;
     }
 
     /**
@@ -51,5 +55,14 @@ class CartVirtualItem {
      */
     public void setAmount(int newAmt) {
         amount = newAmt;
+    }
+
+    /**
+     * getter for the whwther the CartVirtualItem is the special version or not
+     * 
+     * @return boolean isSpecialVersion
+     */
+    public boolean isSpecial() {
+        return isSpecialVersion;
     }
 }
